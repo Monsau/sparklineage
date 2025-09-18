@@ -1,0 +1,117 @@
+# =====================================================================
+# TEMPLATE DOCKER COMPOSE MINIMAL POUR LINEAGE SPARK OPENMETADATA
+# =====================================================================
+
+version: '3.8'
+
+services:
+  # OpenMetadata - Service principal obligatoire
+  openmetadata-server:
+    image: openmetadata/server:1.9.7
+    container_name: openmetadata_server
+    environment:
+      OPENMETADATA_CLUSTER_NAME: openmetadata
+      DB_DRIVER_CLASS: org.postgresql.Driver
+      DB_SCHEME: postgresql
+      DB_USE_SSL: "false"
+      DB_USER: openmetadata_user
+      DB_USER_PASSWORD: openmetadata_password
+      DB_HOST: postgresql
+      DB_PORT: 5432
+      DB_DATABASE: openmetadata_db
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
+      ELASTICSEARCH_SCHEME: http
+      ELASTICSEARCH_USERNAME: ""
+      ELASTICSEARCH_PASSWORD: ""
+    ports:
+      - "8585:8585"
+    depends_on:
+      - postgresql
+      - elasticsearch
+    networks:
+      - app_net
+
+  # PostgreSQL - Base métadata OpenMetadata  
+  postgresql:
+    image: postgres:15
+    container_name: openmetadata_postgresql
+    environment:
+      POSTGRES_DB: openmetadata_db
+      POSTGRES_USER: openmetadata_user
+      POSTGRES_PASSWORD: openmetadata_password
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - app_net
+
+  # ElasticSearch - Indexation et recherche (OBLIGATOIRE)
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: openmetadata_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - app_net
+
+  # MySQL Source - Base de données source
+  mysql-source:
+    image: mysql:8.0
+    container_name: mysql_source
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: source_db
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_source_data:/var/lib/mysql
+      - ./init-source.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_net
+
+  # MySQL Target - Base de données cible  
+  mysql-target:
+    image: mysql:8.0
+    container_name: mysql_target
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: target_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_target_data:/var/lib/mysql
+      - ./init-target.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_net
+
+  # Spark Master - Cluster Spark pour lineage
+  spark-master:
+    image: bitnami/spark:3.5.0
+    container_name: spark_master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    volumes:
+      - ./spark-apps:/opt/bitnami/spark/work-dir
+      - ./jars:/opt/bitnami/spark/ivy
+    networks:
+      - app_net
+
+volumes:
+  postgresql_data:
+  elasticsearch_data:
+  mysql_source_data:
+  mysql_target_data:
+
+networks:
+  app_net:
+    driver: bridge

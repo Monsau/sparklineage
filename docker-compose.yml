@@ -1,0 +1,86 @@
+﻿version: "3.9"
+
+services:
+  # MySQL Source Database
+  mysql-source:
+    image: mysql:8.0
+    container_name: mysql-source
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: source_db
+      MYSQL_USER: openmetadata_user
+      MYSQL_PASSWORD: openmetadata_password
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_source_data:/var/lib/mysql
+      - ./init-source.sql:/docker-entrypoint-initdb.d/init-source.sql
+    networks:
+      - openmetadata_network
+
+  # MySQL Target Database  
+  mysql-target:
+    image: mysql:8.0
+    container_name: mysql-target
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: target_db
+      MYSQL_USER: openmetadata_user
+      MYSQL_PASSWORD: openmetadata_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_target_data:/var/lib/mysql
+      - ./init-target.sql:/docker-entrypoint-initdb.d/init-target.sql
+    networks:
+      - openmetadata_network
+
+
+
+  # Spark Master
+  spark-master:
+    image: bitnami/spark:3.5.0
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    volumes:
+      - ./spark-apps:/opt/bitnami/spark/work-dir
+      - ./jars:/opt/bitnami/spark/ivy
+    networks:
+      - openmetadata_network
+
+  # Spark Worker
+  spark-worker:
+    image: bitnami/spark:3.5.0
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=2
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark-apps:/opt/bitnami/spark/work-dir
+      - ./jars:/opt/bitnami/spark/ivy
+    networks:
+      - openmetadata_network
+
+networks:
+  openmetadata_network:
+    driver: bridge
+
+volumes:
+  mysql_source_data:
+  mysql_target_data:
