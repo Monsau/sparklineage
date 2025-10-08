@@ -1,33 +1,33 @@
-# 🌟 Apache Spark ↔ OpenMetadata Lineage Integration Platform
+#  Apache Spark ↔ OpenMetadata Lineage Integration Platform
 *Complete Professional Documentation - Enterprise-Grade Data Lineage Toolkit*
 
 ---
 
-## 🌐 Multi-Language Documentation | Documentation Multilingue | Documentación Multilingüe | وثائق متعددة اللغات
+##  Multi-Language Documentation | Documentation Multilingue | Documentación Multilingüe | وثائق متعددة اللغات
 
 | Language | Section | Status |
 |----------|---------|--------|
-| 🇺🇸 **English** | [Complete Technical Guide](#-english-complete-documentation) | ✅ Full Coverage |
-| 🇫🇷 **Français** | [Guide Technique Complet](#-documentation-complète-française) | ✅ Couverture Complète |
-| 🇪🇸 **Español** | [Guía Técnica Completa](#-documentación-completa-española) | ✅ Cobertura Completa |
-| 🇸🇦 **العربية** | [الدليل التقني الكامل](#-الوثائق-العربية-الكاملة) | ✅ تغطية كاملة |
+|  **English** | [Complete Technical Guide](#-english-complete-documentation) |  Full Coverage |
+|  **Français** | [Guide Technique Complet](#-documentation-complète-française) |  Couverture Complète |
+|  **Español** | [Guía Técnica Completa](#-documentación-completa-española) |  Cobertura Completa |
+|  **العربية** | [الدليل التقني الكامل](#-الوثائق-العربية-الكاملة) |  تغطية كاملة |
 
 ---
 
-# 🇺🇸 English Complete Documentation
+#  English Complete Documentation
 
-## 🚀 Executive Summary
+##  Executive Summary
 
 The **Apache Spark ↔ OpenMetadata Lineage Platform** is an enterprise-grade solution for automatic data lineage tracking in Spark, with direct exposure in OpenMetadata. It enables zero-code lineage, real-time tracking, and seamless integration for technical teams.
 
-### 🎯 Business Value Proposition
+###  Business Value Proposition
 - **Zero-Code Lineage**: No code changes required in Spark jobs
 - **Real-Time Tracking**: Captures lineage as jobs execute
 - **Multi-Platform**: Works on YARN, Kubernetes, Standalone
 - **Column-Level Lineage**: Tracks transformations at column level
 - **Production Ready**: Used in enterprise environments
 
-## 🏗️ Comprehensive System Architecture
+## ️ Comprehensive System Architecture
 
 ### High-Level Architecture Overview
 
@@ -59,7 +59,7 @@ The **Apache Spark ↔ OpenMetadata Lineage Platform** is an enterprise-grade so
 - **Config Management**: All integration is done via configuration (no code changes)
 - **OpenMetadata**: Receives lineage, displays lineage graph, and provides search/monitoring
 
-## 🛠️ Technology Stack & Dependencies
+## ️ Technology Stack & Dependencies
 
 | Component | Technology | Version | Purpose | License |
 |-----------|------------|---------|---------|---------|
@@ -70,7 +70,7 @@ The **Apache Spark ↔ OpenMetadata Lineage Platform** is an enterprise-grade so
 | **Container Runtime** | Docker | 24.0+ | Service orchestration | Apache 2.0 |
 | **Orchestration** | Docker Compose/K8s/YARN | 2.0+ | Multi-service deployment | Apache 2.0 |
 
-## 📋 System Requirements & Prerequisites
+##  System Requirements & Prerequisites
 
 - **Operating System**: Windows 10/11, macOS 12+, or Linux (Ubuntu 20.04+)
 - **Memory**: 8GB+ RAM (16GB recommended)
@@ -79,7 +79,7 @@ The **Apache Spark ↔ OpenMetadata Lineage Platform** is an enterprise-grade so
 - **Java**: 8+ (for Spark and agent)
 - **Docker**: 24.0+ (for containerized deployment)
 
-## 🚀 Complete Installation & Setup Guide
+##  Complete Installation & Setup Guide
 
 ### Step 1: Environment Preparation
 
@@ -121,7 +121,7 @@ spark-submit \
 - Access OpenMetadata UI at `http://localhost:8585`
 - Navigate to Pipelines and Data Lineage sections
 
-## 📁 Complete Project Structure
+##  Complete Project Structure
 
 ```
 spark/
@@ -143,22 +143,22 @@ spark/
 └── ...
 ```
 
-## 🎯 Feature Specifications
+##  Feature Specifications
 
-### 🔍 Lineage Features
+###  Lineage Features
 - **Automatic Source & Target Discovery**
 - **Column-Level Lineage**
 - **Real-Time Tracking**
 - **No Code Changes Required**
 - **Graphical Visualization in OpenMetadata**
 
-### 🔧 Operational Features
+###  Operational Features
 - **Health Monitoring**
 - **Debug Logging**
 - **Performance Metrics**
 - **Alert System**
 
-## 📖 Usage Examples & Best Practices
+##  Usage Examples & Best Practices
 
 ### Basic Usage Patterns
 
@@ -182,22 +182,22 @@ docker-compose up -d
 #### 3. Kubernetes/YARN/Standalone
 - See `docs/PRODUCTION_DEPLOYMENT.md` for advanced orchestration
 
-## 🔒 Security & Authentication
+##  Security & Authentication
 
 - **JWT Token Management**
 - **RBAC Integration**
 - **SSL/TLS Support**
 - **Audit Logging**
 
-## 🤝 Contributing | Contribution | Contribución | المساهمة
+##  Contributing | Contribution | Contribución | المساهمة
 
 We welcome contributions in all languages! Please see our contribution guidelines for more information.
 
-## 📞 Support | Assistance | Soporte | الدعم
+##  Support | Assistance | Soporte | الدعم
 
 For support in any language, please reach out through our community channels or GitHub Issues.
 
-## 📄 License | Licence | Licencia | الترخيص
+##  License | Licence | Licencia | الترخيص
 
 This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 

@@ -5,14 +5,14 @@ Welcome to the Spark ↔ OpenMetadata Lineage connector! This project provides a
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 - **[Full Technical Documentation (multi-language)](./full_documentation.md)**
 - [Français](./README-fr.md) | [Español](./README-es.md) | [العربية](./README-ar.md)
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 1. **Clone the repository**
    ```powershell
@@ -38,7 +38,7 @@ For advanced configuration, troubleshooting, and architecture details, see [full
 
 ---
 
-## 🏗️ Project Structure
+## ️ Project Structure
 
 - `full_documentation.md` — Complete technical guide (EN, FR, ES, AR)
 - `README-fr.md`, `README-es.md`, `README-ar.md` — Language-specific quickstart and links
@@ -50,7 +50,7 @@ For advanced configuration, troubleshooting, and architecture details, see [full
 
 ---
 
-## 🤝 Contributing & Support
+##  Contributing & Support
 
 We welcome contributions in all languages! For details, see the [contribution guidelines](./full_documentation.md#-contributing--contribution--contribución--المساهمة).
 
@@ -58,7 +58,7 @@ For support, open a GitHub issue or see the [Support section](./full_documentati
 
 ---
 
-**Built with ❤️ for the global data community**
+**Built with ️ for the global data community**
 ## Option A : Déploiement Docker
 
 ### Installation rapide
@@ -90,14 +90,14 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
   /opt/bitnami/spark/complex_spark_lineage_job.py
 ```
 
-### 📊 Services Disponibles
+###  Services Disponibles
 
 | Service | URL | Credentials |
 |---------|-----|-------------|
-| 📋 **OpenMetadata UI** | http://localhost:8585 | admin/admin |
-| ⚡ **Spark Master** | http://localhost:8080 | - |
-| 🗄️ **MySQL Source** | localhost:3308 | root/password |
-| 🗄️ **MySQL Target** | localhost:3307 | root/password |
+|  **OpenMetadata UI** | http://localhost:8585 | admin/admin |
+|  **Spark Master** | http://localhost:8080 | - |
+| ️ **MySQL Source** | localhost:3308 | root/password |
+| ️ **MySQL Target** | localhost:3307 | root/password |
 
 ---
 
@@ -124,16 +124,16 @@ ls -la *.jar
 
 ```mermaid
 sequenceDiagram
-    participant Dev as 👨‍💻 Toi
-    participant OM as 📋 OpenMetadata
-    participant Bot as 🤖 ingestion-bot
+    participant Dev as ‍ Toi
+    participant OM as  OpenMetadata
+    participant Bot as  ingestion-bot
     
     Dev->>OM: Login sur :8585
     Dev->>OM: Settings → Bots
     Dev->>Bot: Clique sur ingestion-bot
     Bot->>Dev: Page du bot
     Dev->>Bot: "Generate New Token"
-    Bot->>Dev: 🎫 JWT Token
+    Bot->>Dev:  JWT Token
     Dev->>Dev: Sauvegarde le token
 ```
 
@@ -250,14 +250,14 @@ $SPARK_HOME/bin/spark-submit \
 
 ```mermaid
 flowchart TD
-    A[📋 OpenMetadata UI] --> B[Settings → Services]
+    A[ OpenMetadata UI] --> B[Settings → Services]
     B --> C[Databases → Add Database Service]
-    C --> D1[🗄️ Service MySQL Source]
-    C --> D2[🗄️ Service MySQL Target] 
-    C --> D3[🐘 Service PostgreSQL]
+    C --> D1[️ Service MySQL Source]
+    C --> D2[️ Service MySQL Target] 
+    C --> D3[ Service PostgreSQL]
     
     B --> E[Pipelines → Add Pipeline Service]
-    E --> F[⚡ Service Spark Pipeline]
+    E --> F[ Service Spark Pipeline]
     
     D1 --> G[Test Connection]
     D2 --> G
@@ -273,7 +273,7 @@ flowchart TD
 
 ## Configuration avancée
 
-### 📊 Options de Configuration Complètes
+###  Options de Configuration Complètes
 
 ```bash
 # Configuration complète pour spark-submit
@@ -306,7 +306,7 @@ spark-submit \
   ton_script.py
 ```
 
-### 🎯 Variables d'Environnement Détaillées
+###  Variables d'Environnement Détaillées
 
 ```bash
 # === Core OpenMetadata ===
@@ -363,9 +363,9 @@ def create_spark_session():
     openmetadata_jar = f"{jars_path}/openmetadata-spark-agent.jar"
     mysql_jar = f"{jars_path}/mysql-connector-j-8.0.33.jar"
     
-    print(f"🚀 Création session Spark avec lineage vers {openmetadata_host}")
-    print(f"📊 Pipeline Service: {pipeline_service}")
-    print(f"⚡ Pipeline Name: {pipeline_name}")
+    print(f" Création session Spark avec lineage vers {openmetadata_host}")
+    print(f" Pipeline Service: {pipeline_service}")
+    print(f" Pipeline Name: {pipeline_name}")
     
     return SparkSession.builder \
         .appName(f"ETL-{pipeline_name}") \
@@ -388,11 +388,11 @@ def main():
     spark = create_spark_session()
     spark.sparkContext.setLogLevel("WARN")
     
-    print("📊 Début du job ETL avec lineage automatique...")
+    print(" Début du job ETL avec lineage automatique...")
     
     try:
         # === Lecture des sources (lineage automatiquement capturé) ===
-        print("📖 Lecture des données sources...")
+        print(" Lecture des données sources...")
         
         # Source MySQL
         df_customers = spark.read \
@@ -412,7 +412,7 @@ def main():
             .load()
         
         # === Transformations (lineage des colonnes tracé) ===
-        print("🔄 Transformations des données...")
+        print(" Transformations des données...")
         
         # Nettoyage et enrichissement
         df_customers_clean = df_customers \
@@ -440,7 +440,7 @@ def main():
             .withColumn("processed_at", current_timestamp())
         
         # === Écriture (lineage automatiquement capturé) ===
-        print("💾 Sauvegarde des résultats...")
+        print(" Sauvegarde des résultats...")
         
         # Vers MySQL Target
         df_final.write \
@@ -452,21 +452,21 @@ def main():
             .mode("overwrite") \
             .save()
         
-        print(f"✅ Job terminé ! {df_final.count()} lignes traitées")
-        print("📋 Lineage disponible dans OpenMetadata !")
+        print(f" Job terminé ! {df_final.count()} lignes traitées")
+        print(" Lineage disponible dans OpenMetadata !")
         
     except Exception as e:
-        print(f"❌ Erreur dans le job : {str(e)}")
+        print(f" Erreur dans le job : {str(e)}")
         raise
     finally:
         spark.stop()
-        print("🛑 Session Spark fermée")
+        print(" Session Spark fermée")
 
 if __name__ == "__main__":
     main()
 ```
 
-### 🚀 Script de Lancement Automatisé
+###  Script de Lancement Automatisé
 
 ```bash
 #!/bin/bash
@@ -478,17 +478,17 @@ set -e
 SCRIPT_NAME=$(basename "$1")
 JOB_DATE=$(date +%Y%m%d_%H%M%S)
 
-echo "🚀 Lancement job Spark avec lineage : $SCRIPT_NAME"
-echo "📅 Date/Heure : $JOB_DATE"
+echo " Lancement job Spark avec lineage : $SCRIPT_NAME"
+echo " Date/Heure : $JOB_DATE"
 
 # Vérifications préalables
 if [ -z "$OPENMETADATA_JWT_TOKEN" ]; then
-    echo "❌ OPENMETADATA_JWT_TOKEN non défini"
+    echo " OPENMETADATA_JWT_TOKEN non défini"
     exit 1
 fi
 
 if [ ! -f "$1" ]; then
-    echo "❌ Script Spark non trouvé : $1"
+    echo " Script Spark non trouvé : $1"
     exit 1
 fi
 
@@ -496,8 +496,8 @@ fi
 export PIPELINE_NAME="etl_${USER}_${JOB_DATE}"
 export PIPELINE_DESCRIPTION="Job ETL automatique - $SCRIPT_NAME - $JOB_DATE"
 
-echo "📊 Pipeline : $PIPELINE_NAME"
-echo "🔗 OpenMetadata : $OPENMETADATA_HOST"
+echo " Pipeline : $PIPELINE_NAME"
+echo " OpenMetadata : $OPENMETADATA_HOST"
 
 # Lancement avec lineage
 $SPARK_HOME/bin/spark-submit \
@@ -513,7 +513,7 @@ $SPARK_HOME/bin/spark-submit \
   --conf "spark.openmetadata.transport.pipelineDescription=$PIPELINE_DESCRIPTION" \
   "$@"
 
-echo "✅ Job terminé ! Lineage disponible dans OpenMetadata"
+echo " Job terminé ! Lineage disponible dans OpenMetadata"
 ```
 
 **Utilisation :**
@@ -533,7 +533,7 @@ chmod +x run-spark-with-lineage.sh
 
 ## Exemples de configurations prêtes à l'emploi
 
-### 📋 Pour YARN Cluster
+###  Pour YARN Cluster
 
 ```bash
 # Production YARN avec lineage
@@ -553,7 +553,7 @@ spark-submit \
   hdfs://namenode:9000/spark-jobs/production_etl.py
 ```
 
-### 🌊 Pour Kubernetes
+###  Pour Kubernetes
 
 ```yaml
 # spark-lineage-k8s.yaml
@@ -596,7 +596,7 @@ spec:
       restartPolicy: Never
 ```
 
-### 🏠 Pour Standalone Cluster
+###  Pour Standalone Cluster
 
 ```bash
 # Configuration Standalone
@@ -617,7 +617,7 @@ $SPARK_HOME/bin/spark-submit \
   ton_job.py
 ```
 
-### 💻 Pour Développement Local
+###  Pour Développement Local
 
 ```bash
 # Mode local avec lineage pour debug
@@ -644,31 +644,31 @@ spark-submit \
 
 ```mermaid
 flowchart TD
-    Start[❓ Problème Lineage] --> Check1{JARs présents ?}
+    Start[ Problème Lineage] --> Check1{JARs présents ?}
     
-    Check1 -->|❌| Fix1[📦 Télécharge les JARs]
-    Check1 -->|✅| Check2{Token valide ?}
+    Check1 -->|| Fix1[ Télécharge les JARs]
+    Check1 -->|| Check2{Token valide ?}
     
-    Check2 -->|❌| Fix2[🔑 Régénère token OM]
-    Check2 -->|✅| Check3{OM accessible ?}
+    Check2 -->|| Fix2[ Régénère token OM]
+    Check2 -->|| Check3{OM accessible ?}
     
-    Check3 -->|❌| Fix3[🌐 Check connectivité réseau]
-    Check3 -->|✅| Check4{Config Spark OK ?}
+    Check3 -->|| Fix3[ Check connectivité réseau]
+    Check3 -->|| Check4{Config Spark OK ?}
     
-    Check4 -->|❌| Fix4[⚙️ Vérifie spark.extraListeners]
-    Check4 -->|✅| Check5{Logs d'erreur ?}
+    Check4 -->|| Fix4[️ Vérifie spark.extraListeners]
+    Check4 -->|| Check5{Logs d'erreur ?}
     
-    Check5 -->|✅| Fix5[🐛 Mode debug activé]
-    Check5 -->|❌| Success[✅ Mystère résolu !]
+    Check5 -->|| Fix5[ Mode debug activé]
+    Check5 -->|| Success[ Mystère résolu !]
     
-    Fix1 --> Test[🧪 Test à nouveau]
+    Fix1 --> Test[ Test à nouveau]
     Fix2 --> Test
     Fix3 --> Test
     Fix4 --> Test
     Fix5 --> Test
 ```
 
-#### 🔥 ClassNotFoundException : OpenLineageSparkListener
+####  ClassNotFoundException : OpenLineageSparkListener
 
 **Erreur :**
 ```
@@ -687,7 +687,7 @@ spark-submit --jars /path/to/openmetadata-spark-agent.jar --conf "spark.driver.e
 wget https://github.com/open-metadata/OpenMetadata/releases/download/1.9.7/openmetadata-spark-agent.jar
 ```
 
-#### 🎫 Erreur Token JWT
+####  Erreur Token JWT
 
 **Erreur :**
 ```
@@ -706,7 +706,7 @@ curl -H "Authorization: Bearer $OPENMETADATA_JWT_TOKEN" http://openmetadata:8585
 echo "Token: ${OPENMETADATA_JWT_TOKEN:0:20}..."
 ```
 
-#### 🌐 Problèmes de Connectivité
+####  Problèmes de Connectivité
 
 **Erreur :**
 ```
@@ -726,7 +726,7 @@ spark.openmetadata.transport.hostPort=http://openmetadata:8585/api
 nslookup openmetadata
 ```
 
-#### ⚙️ Config Spark Non Prise en Compte
+#### ️ Config Spark Non Prise en Compte
 
 **Si le lineage ne marche pas :**
 
@@ -741,7 +741,7 @@ tail -f $SPARK_HOME/logs/spark-*.log | grep -i openlineage
 --conf "spark.openmetadata.transport.debugFacet=true"
 ```
 
-### 🐛 Mode Debug Complet
+###  Mode Debug Complet
 
 ```bash
 # Lancement avec debug maximal
@@ -765,46 +765,46 @@ grep -i "openlineage\|openmetadata" debug_lineage.log
 
 ### Checklist de diagnostic
 
-1. **✅ JARs** : `ls -la *.jar` 
-2. **✅ Token** : `curl -H "Authorization: Bearer $TOKEN" http://om:8585/api/v1/system/version`
-3. **✅ Réseau** : `telnet openmetadata-host 8585`
-4. **✅ Config** : Vérifier `spark.extraListeners`
-5. **✅ Services OM** : Pipeline service créé dans OpenMetadata
-6. **✅ Logs** : Chercher "openlineage" dans les logs Spark
+1. ** JARs** : `ls -la *.jar` 
+2. ** Token** : `curl -H "Authorization: Bearer $TOKEN" http://om:8585/api/v1/system/version`
+3. ** Réseau** : `telnet openmetadata-host 8585`
+4. ** Config** : Vérifier `spark.extraListeners`
+5. ** Services OM** : Pipeline service créé dans OpenMetadata
+6. ** Logs** : Chercher "openlineage" dans les logs Spark
 
 ---
 
 
 ## Résultats attendus dans OpenMetadata
 
-### 🎯 Ce que tu vas voir
+###  Ce que tu vas voir
 
 ```mermaid
 graph TB
-    subgraph OM[📋 OpenMetadata Interface]
+    subgraph OM[ OpenMetadata Interface]
         
-        subgraph Services[🏢 Services]
-            PS[⚡ Pipeline Service: Spark]
-            DBS[🗄️ Database Service: MySQL Source]
-            DBT[🗄️ Database Service: MySQL Target]
+        subgraph Services[ Services]
+            PS[ Pipeline Service: Spark]
+            DBS[️ Database Service: MySQL Source]
+            DBT[️ Database Service: MySQL Target]
         end
         
-        subgraph Pipelines[🔄 Pipelines]
-            P1[📝 mon_etl_pipeline]
-            P2[📊 customer_analytics_pipeline] 
-            P3[🔄 daily_processing_pipeline]
+        subgraph Pipelines[ Pipelines]
+            P1[ mon_etl_pipeline]
+            P2[ customer_analytics_pipeline] 
+            P3[ daily_processing_pipeline]
         end
         
-        subgraph Lineage[🔗 Data Lineage]
-            L1[📊 Table customers] --> L2[🔄 Spark Transform]
-            L3[📊 Table orders] --> L2
-            L2 --> L4[📈 Table customer_analytics]
+        subgraph Lineage[ Data Lineage]
+            L1[ Table customers] --> L2[ Spark Transform]
+            L3[ Table orders] --> L2
+            L2 --> L4[ Table customer_analytics]
         end
         
-        subgraph Metadata[📋 Métadonnées]
-            M1[📊 Schémas]
-            M2[🏷️ Colonnes] 
-            M3[🔍 Types de données]
+        subgraph Metadata[ Métadonnées]
+            M1[ Schémas]
+            M2[️ Colonnes] 
+            M3[ Types de données]
             M4[⏱️ Historique exécutions]
         end
     end
@@ -826,18 +826,18 @@ Dans OpenMetadata, vous visualiserez :
 
 ---
 
-## 🇬🇧 English
+##  English
 
-### 📋 Quick Start Guide
+###  Quick Start Guide
 
 This project provides automatic data lineage tracking for Apache Spark jobs with OpenMetadata integration. Perfect for production environments where you need to track ETL pipelines automatically.
 
-### ⚡ Key Features
-- ✅ **Zero-code lineage** - Just add JARs and configuration
-- ✅ **Real-time tracking** - Captures lineage as jobs execute
-- ✅ **Multi-platform** - Works on YARN, Kubernetes, Standalone
-- ✅ **Column-level lineage** - Tracks transformations at column level
-- ✅ **Production ready** - Used in enterprise environments
+###  Key Features
+-  **Zero-code lineage** - Just add JARs and configuration
+-  **Real-time tracking** - Captures lineage as jobs execute
+-  **Multi-platform** - Works on YARN, Kubernetes, Standalone
+-  **Column-level lineage** - Tracks transformations at column level
+-  **Production ready** - Used in enterprise environments
 
 ### � Quick Integration
 
@@ -866,26 +866,26 @@ docker-compose up -d
 ./run-example.sh
 ```
 
-### 📊 Access Points
+###  Access Points
 - **OpenMetadata UI**: http://localhost:8585 (admin/admin)
 - **Spark Master UI**: http://localhost:8080
 - **Example Databases**: MySQL on ports 3307/3308
 
 ---
 
-## 🇪🇸 Español
+##  Español
 
-### 📋 Descripción
+###  Descripción
 Este proyecto implementa un sistema de linaje automático para Apache Spark con OpenMetadata. Rastrea automáticamente los flujos de datos entre tablas MySQL a través de transformaciones ETL de Spark.
 
-### ⚡ Características
-- ✅ **Linaje automático** - Captura automática de relaciones entre tablas
-- ✅ **Multi-tabla** - Soporte para transformaciones complejas (7 tablas: 4 fuentes + 3 objetivos)
-- ✅ **OpenMetadata** - Integración nativa con OpenMetadata 1.9.7
-- ✅ **Docker** - Entorno completo con Docker Compose
-- ✅ **Spark 3.5.0** - Última versión estable de Apache Spark
+###  Características
+-  **Linaje automático** - Captura automática de relaciones entre tablas
+-  **Multi-tabla** - Soporte para transformaciones complejas (7 tablas: 4 fuentes + 3 objetivos)
+-  **OpenMetadata** - Integración nativa con OpenMetadata 1.9.7
+-  **Docker** - Entorno completo con Docker Compose
+-  **Spark 3.5.0** - Última versión estable de Apache Spark
 
-### 🛠️ Instalación
+### ️ Instalación
 
 1. **Clonar el repositorio**
 ```bash
@@ -907,7 +907,7 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
   /opt/bitnami/spark/complex_spark_lineage_job.py
 ```
 
-### 📊 Servicios
+###  Servicios
 - **OpenMetadata UI**: http://localhost:8585
 - **Spark Master UI**: http://localhost:8080
 - **MySQL Fuente**: localhost:3308 (root/password)
@@ -915,19 +915,19 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
 
 ---
 
-## 🇵🇹 Português
+##  Português
 
-### 📋 Descrição
+###  Descrição
 Este projeto implementa um sistema de linhagem automática para Apache Spark com OpenMetadata. Rastreia automaticamente os fluxos de dados entre tabelas MySQL através de transformações ETL do Spark.
 
-### ⚡ Funcionalidades
-- ✅ **Linhagem automática** - Captura automática de relacionamentos entre tabelas
-- ✅ **Multi-tabela** - Suporte para transformações complexas (7 tabelas: 4 fontes + 3 destinos)
-- ✅ **OpenMetadata** - Integração nativa com OpenMetadata 1.9.7
-- ✅ **Docker** - Ambiente completo com Docker Compose
-- ✅ **Spark 3.5.0** - Última versão estável do Apache Spark
+###  Funcionalidades
+-  **Linhagem automática** - Captura automática de relacionamentos entre tabelas
+-  **Multi-tabela** - Suporte para transformações complexas (7 tabelas: 4 fontes + 3 destinos)
+-  **OpenMetadata** - Integração nativa com OpenMetadata 1.9.7
+-  **Docker** - Ambiente completo com Docker Compose
+-  **Spark 3.5.0** - Última versão estável do Apache Spark
 
-### 🛠️ Instalação
+### ️ Instalação
 
 1. **Clonar o repositório**
 ```bash
@@ -949,7 +949,7 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
   /opt/bitnami/spark/complex_spark_lineage_job.py
 ```
 
-### 📊 Serviços
+###  Serviços
 - **OpenMetadata UI**: http://localhost:8585
 - **Spark Master UI**: http://localhost:8080
 - **MySQL Fonte**: localhost:3308 (root/password)
@@ -957,19 +957,19 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
 
 ---
 
-## 🇸🇦 العربية
+##  العربية
 
-### 📋 الوصف
+###  الوصف
 يطبق هذا المشروع نظام نسب البيانات التلقائي لـ Apache Spark مع OpenMetadata. يتتبع تلقائياً تدفقات البيانات بين جداول MySQL من خلال تحويلات Spark ETL.
 
-### ⚡ الميزات
-- ✅ **نسب تلقائي** - التقاط تلقائي لعلاقات الجداول
-- ✅ **متعدد الجداول** - دعم للتحويلات المعقدة (7 جداول: 4 مصادر + 3 أهداف)
-- ✅ **OpenMetadata** - التكامل الأصلي مع OpenMetadata 1.9.7
-- ✅ **Docker** - بيئة كاملة مع Docker Compose
-- ✅ **Spark 3.5.0** - أحدث إصدار مستقر من Apache Spark
+###  الميزات
+-  **نسب تلقائي** - التقاط تلقائي لعلاقات الجداول
+-  **متعدد الجداول** - دعم للتحويلات المعقدة (7 جداول: 4 مصادر + 3 أهداف)
+-  **OpenMetadata** - التكامل الأصلي مع OpenMetadata 1.9.7
+-  **Docker** - بيئة كاملة مع Docker Compose
+-  **Spark 3.5.0** - أحدث إصدار مستقر من Apache Spark
 
-### 🛠️ التثبيت
+### ️ التثبيت
 
 **1. استنساخ المستودع**
 ```bash
@@ -991,7 +991,7 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
   /opt/bitnami/spark/complex_spark_lineage_job.py
 ```
 
-### 📊 الخدمات
+###  الخدمات
 - **OpenMetadata UI**: http://localhost:8585
 - **Spark Master UI**: http://localhost:8080
 - **MySQL المصدر**: localhost:3308 (root/password)
@@ -999,7 +999,7 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
 
 ---
 
-## 🏗️ Architecture | Arquitectura | Arquitetura | الهندسة المعمارية
+## ️ Architecture | Arquitectura | Arquitetura | الهندسة المعمارية
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -1016,7 +1016,7 @@ docker exec spark-master /opt/bitnami/spark/bin/spark-submit \
                     └─────────────────┘
 ```
 
-## 📁 Project Structure | Estructura | Estrutura | هيكل المشروع
+##  Project Structure | Estructura | Estrutura | هيكل المشروع
 
 ```
 sparklineage/
@@ -1032,7 +1032,7 @@ sparklineage/
 └── README.md                       # This file
 ```
 
-## 🤝 Contributing | Contribuir | Contribuindo | المساهمة
+##  Contributing | Contribuir | Contribuindo | المساهمة
 
 1. Fork the project | Haz fork del proyecto | Faça fork do projeto | قم بعمل fork للمشروع
 2. Create your feature branch | Crea tu rama de características | Crie sua branch de feature | أنشئ فرع الميزة الخاص بك
@@ -1040,7 +1040,7 @@ sparklineage/
 4. Push to the branch | Haz push a la rama | Faça push para a branch | ادفع إلى الفرع
 5. Open a Pull Request | Abre un Pull Request | Abra um Pull Request | افتح Pull Request
 
-## 📝 License | Licencia | Licença | الترخيص
+##  License | Licencia | Licença | الترخيص
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
