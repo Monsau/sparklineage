@@ -1,124 +1,64 @@
-# ---
-# English Translation
 
-## Spark + OpenMetadata | Automatic Data Lineage
+# Spark ↔ OpenMetadata Lineage Connector
 
-This project provides an integration solution for automatic data lineage tracking in Apache Spark, with direct exposure in OpenMetadata. It is intended for technical teams wishing to industrialize the traceability of their Spark pipelines without modifying application code.
-
-...existing code...
-
-# ---
-# Traducción al Español
-
-## Spark + OpenMetadata | Linaje de Datos Automático
-
-Este proyecto proporciona una solución de integración para el seguimiento automático del linaje de datos en Apache Spark, con exposición directa en OpenMetadata. Está destinado a equipos técnicos que deseen industrializar la trazabilidad de sus pipelines de Spark sin modificar el código de la aplicación.
-
-...existing code...
-
-# ---
-# الترجمة إلى العربية
-
-## سبارك + أوبن ميتاداتا | تتبع نسب البيانات التلقائي
-
-يوفر هذا المشروع حلاً للتكامل لتتبع نسب البيانات تلقائيًا في Apache Spark، مع عرض مباشر في OpenMetadata. وهو مخصص للفرق الفنية التي ترغب في أتمتة تتبع خطوط أنابيب Spark الخاصة بهم دون تعديل كود التطبيق.
-
-...existing code...
-
-# Spark + OpenMetadata | Lineage Automatique de Données
-
-Ce projet fournit une solution d'intégration pour le suivi automatique du lineage des données dans Apache Spark, avec exposition directe dans OpenMetadata. Il s'adresse aux équipes techniques souhaitant industrialiser la traçabilité de leurs pipelines Spark, sans modification du code applicatif.
-
-
-## Fonctionnalités principales
-
-```mermaid
-flowchart LR
-    subgraph Sources[📊 Sources de Données]
-        S1[🗄️ MySQL Source]
-        S2[📁 Fichiers CSV] 
-        S3[🪣 S3 Bucket]
-        S4[🐘 PostgreSQL]
-    end
-    
-    subgraph Spark[⚡ Apache Spark]
-        J1[📝 Job ETL]
-        J2[🔄 Transformations]
-        J3[📊 Agrégations]
-    end
-    
-    subgraph Targets[🎯 Destinations]
-        T1[🗄️ MySQL Target]
-        T2[📊 Data Warehouse]
-        T3[📈 Analytics DB]
-    end
-    
-    subgraph OM[📋 OpenMetadata]
-        L1[🔗 Lineage Graph]
-        L2[� Data Quality]
-        L3[⏱️ Pipeline History]
-    end
-    
-    Sources --> Spark
-    Spark --> Targets
-    Spark -.->|Auto-track| OM
-    
-    style Spark fill:#ff6b35
-    style OM fill:#4ecdc4
-```
-
-- Découverte automatique des sources et destinations
-- Suivi du lineage en temps réel pour chaque transformation Spark
-- Visualisation graphique dans OpenMetadata
-- Intégration sans modification du code applicatif (configuration uniquement)
-- Métadonnées enrichies (schémas, colonnes, transformations)
-
-
-## Modes d'intégration
-
-
-### Option A : Environnement complet (Docker)
-
-```mermaid
-graph TB
-    subgraph Docker[🐳 Docker Compose]
-        D1[📊 OpenMetadata]
-        D2[⚡ Spark Master]
-        D3[🔧 Spark Worker] 
-        D4[🗄️ MySQL Source]
-        D5[🗄️ MySQL Target]
-    end
-    
-    D2 --> D3
-    D2 -.->|Lineage| D1
-    D4 --> D2
-    D2 --> D5
-```
-
-
-### Option B : Intégration dans un cluster Spark existant
-
-```mermaid
-graph LR
-    subgraph Existing[🏢 Ton Infrastructure]
-        E1[⚡ Spark Cluster]
-        E2[📊 Tes DBs]
-        E3[🔄 Tes Jobs ETL]
-    end
-    
-    subgraph Add[➕ À Ajouter]
-        A1[📋 OpenMetadata]
-        A2[🔧 Agent JAR]
-        A3[⚙️ Config Spark]
-    end
-    
-    Existing --> Add
-    Add -.->|Lineage Auto| A1
-```
+Welcome to the Spark ↔ OpenMetadata Lineage connector! This project provides a professional, enterprise-grade solution for automated data lineage tracking in Apache Spark, with direct exposure in OpenMetadata.
 
 ---
 
+## 📚 Documentation
 
+- **[Full Technical Documentation (multi-language)](./full_documentation.md)**
+- [Français](./README-fr.md) | [Español](./README-es.md) | [العربية](./README-ar.md)
+
+---
+
+## 🚀 Quick Start
+
+1. **Clone the repository**
+   ```powershell
+   git clone <repository-url>
+   cd spark
+   ```
+2. **Download required JARs**
+   ```powershell
+   # Download OpenMetadata Spark Agent and MySQL connector
+   # (see full_documentation.md for links)
+   ```
+3. **Set up your Spark environment**
+   - Add JARs to your Spark classpath (via `spark-submit` or `spark-defaults.conf`).
+   - Configure OpenMetadata endpoint and JWT token.
+4. **Run example job**
+   ```powershell
+   ./run-example.sh
+   ```
+5. **Verify lineage in OpenMetadata**
+   - Access OpenMetadata UI at `http://localhost:8585` and check Pipelines/Data Lineage.
+
+For advanced configuration, troubleshooting, and architecture details, see [full_documentation.md](./full_documentation.md).
+
+---
+
+## 🏗️ Project Structure
+
+- `full_documentation.md` — Complete technical guide (EN, FR, ES, AR)
+- `README-fr.md`, `README-es.md`, `README-ar.md` — Language-specific quickstart and links
+- `docker-compose.yml` — Infrastructure services
+- `samples/` — SQL initialization examples
+- `jars/` — Required JAR files
+- `complex_spark_lineage_job.py` — Example Spark ETL job
+- `docs/` — Additional documentation
+
+---
+
+## 🤝 Contributing & Support
+
+We welcome contributions in all languages! For details, see the [contribution guidelines](./full_documentation.md#-contributing--contribution--contribución--المساهمة).
+
+For support, open a GitHub issue or see the [Support section](./full_documentation.md#-support--assistance--soporte--الدعم).
+
+---
+
+**Built with ❤️ for the global data community**
 ## Option A : Déploiement Docker
 
 ### Installation rapide
